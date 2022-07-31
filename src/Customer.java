@@ -54,25 +54,92 @@ public class Customer extends RandomGen implements CRUD {
 	 */
 	@Override
 	public void create () {
-		
+		System.out.printf("\n\n\n%60s ************* Welcome to Customer Registration *************", "");
+
+		Scanner read = new Scanner(System.in);
+		System.out.print("\nPlease enter your name: \t");
+		String name = read.nextLine();
+
+		System.out.print("\nPlease enter your email address: \t");
+		String email = read.nextLine();
+
+		System.out.print("\nPlease enter your password: \t");
+		String password = read.nextLine();
+
+		System.out.print("\nPLease enter your phone number: \t");
+		String phoneNum = read.nextLine();
+
+		System.out.print("\nPlease enter your age: \t");
+		int age = read.nextInt();
+
+		customerCollection.add(new Customer(name, email, password, phoneNum, address, age));
 	}
 	
-	/**
-	 * Takes UserID as input and outputs an unformatted string containing the data
-	 */
 	@Override
 	public void read(String userID) {
-		
+		boolean isFound = false;
+		Customer cust = customerCollection.get(0);
+		for (Customer c : customerCollection) {
+			if (userID.equals(c.getUserID())) {
+				System.out.printf("%-50sCustomer Found...\n\n\n", " ");
+				displayHeader();
+				isFound = true;
+				cust = c;
+				break;
+			}
+		}
+		if (isFound) {
+			System.out.println(cust.toString(1));
+            System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+		} else {
+			System.out.printf("%50sNo Customer with the ID %s Found...\n", " ", userID);
+		}
 	}
-	
+
 	@Override
 	public void update(String userID) {
-		
+
 	}
-	
+
 	@Override
 	public void delete(String userID) {
-		
+
+	}
+
+	/* ----------------Utilities------------- */
+
+	/**
+	 * Displays formatted user ID string
+	 * 
+	 * @param userID
+	 * @return formatted userID string
+	 */
+	public String randomIdRead(String userID) {
+		StringBuilder userString = new StringBuilder();
+		for (int i = 0; i < userID.length(); i++) {
+			if (i == 3) {
+				userString.append(" ").append(userID.charAt(i));
+			} else if (i < userID.length()) {
+				userString.append(userID.charAt(i));
+			}
+		}
+		return userString.toString();
+	}
+
+	/**
+	 * Returns String with all User data
+	 * @see randomIDDisplay()
+	 * 
+	 * @param i for serial numbers
+	 * @return customer data in String
+	 */
+	private String toString(int i) {
+		return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i, randomIdRead(userID), name, age, email, address, phoneNum);
+	}
+	
+	public boolean isUnique(String emailID) {
+		boolean _isUnique = false;
+		return _isUnique;
 	}
 }
 
