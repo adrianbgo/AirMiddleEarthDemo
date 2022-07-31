@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Customer extends RandomGen {
+public class Customer extends RandomGen implements CRUD {
 	/* -----------------------Fields----------------------- */
 	private final String userID;
 	private String name;
@@ -45,6 +45,34 @@ public class Customer extends RandomGen {
 		this.phoneNum = _phone;
 		this.address = _address;
 		this.age = _age;
+	}
+
+	/* ---------------------CRUD----------------------- */
+
+	/**
+	 * Takes user input for new customer and adds them to app memory.
+	 */
+	@Override
+	public void create () {
+		
+	}
+	
+	/**
+	 * Takes UserID as input and outputs an unformatted string containing the data
+	 */
+	@Override
+	public void read(String userID) {
+		
+	}
+	
+	@Override
+	public void update(String userID) {
+		
+	}
+	
+	@Override
+	public void delete(String userID) {
+		
 	}
 }
 
