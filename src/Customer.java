@@ -62,6 +62,11 @@ public class Customer extends RandomGen implements CRUD {
 
 		System.out.print("\nPlease enter your email address: \t");
 		String email = read.nextLine();
+		while (!isUnique(email)) {
+			System.out.println("ERROR::This email already exists.");
+			System.out.print("Please enter your email address: \t");
+			email = read.nextLine();
+		}
 
 		System.out.print("\nPlease enter your password: \t");
 		String password = read.nextLine();
@@ -98,7 +103,35 @@ public class Customer extends RandomGen implements CRUD {
 
 	@Override
 	public void update(String userID) {
-
+		boolean isFound = false;
+		Customer cust = customerCollection.get(0);
+		Scanner read = new Scanner(System.in);
+		for (Customer c : customerCollection) {
+			if (userID.equals(c.getUserID())) {
+				System.out.print("\nEnter trhe new name of the Passenger: \t");
+				String name = read.nextLine();
+				c.setName(name);
+				
+				System.out.print("\nEnter the new email of the Passenger: \t");
+				String email = read.nextLine();
+				c.setEmail(email);
+				
+				System.out.print("\nEnter the new phone number of the Passenger: \t");
+				String phoneNum = read.nextLine();
+				c.setPhoneNum(phoneNum);
+				
+				System.out.print("\nEnter the new address of the Passenger: \t");
+				String address = read.nextLine();
+				c.setAddress(address);
+				
+				System.out.print("\nEnter the new age of the Passenger: \t");
+				int age = read.nextInt();
+				c.setAge(age);
+			}
+		}
+		if (!isFound) {
+			System.out.printf("%50sNo Customer with the ID %s Found...\n", " ", userID);
+		}
 	}
 
 	@Override
@@ -137,9 +170,81 @@ public class Customer extends RandomGen implements CRUD {
 		return String.format("%10s| %-10d | %-10s | %-32s | %-7s | %-27s | %-35s | %-23s |", "", i, randomIdRead(userID), name, age, email, address, phoneNum);
 	}
 	
+	/**
+	 * Takes an email address and determines whether it
+	 * is unique.
+	 * 
+	 * @param emailID is the email address
+	 * @return true if unique, otherwise false
+	 */
 	public boolean isUnique(String emailID) {
-		boolean _isUnique = false;
+		boolean _isUnique = true;
+		for (Customer c : customerCollection) {
+			if (emailID.equals(c.getEmail()) {
+				_isUnique = false;
+				break;
+			}
+		}
 		return _isUnique;
+	}
+	
+	/**
+	 * Displays visual header
+	 */
+	void displayHeader() {
+        System.out.println();
+        System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        System.out.printf("%10s| SerialNum  |   UserID   | Passenger Names                  | Age     | EmailID\t\t       | Home Address\t\t\t     | Phone Number\t       |%n", "");
+        System.out.printf("%10s+------------+------------+----------------------------------+---------+-----------------------------+-------------------------------------+-------------------------+\n", "");
+        System.out.println();
+    }
+	
+	/* -------------- Getters & Setters ------------- */
+	public String getName() {
+		return name;
+	}
+	public String getUserID() {
+		return userID;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public void setAge(int age) {
+		this.age = age;
 	}
 }
 
