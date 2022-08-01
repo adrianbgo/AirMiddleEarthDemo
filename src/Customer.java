@@ -1,5 +1,9 @@
 import java.util.*;
 
+/** Refers to a Customer or Passenger
+ * 
+ * @author adrian.go
+ */
 public class Customer extends RandomGen implements CRUD {
 	/* -----------------------Fields----------------------- */
 	private final String userID;
@@ -180,7 +184,7 @@ public class Customer extends RandomGen implements CRUD {
 	public boolean isUnique(String emailID) {
 		boolean _isUnique = true;
 		for (Customer c : customerCollection) {
-			if (emailID.equals(c.getEmail()) {
+			if (emailID.equals(c.getEmail())) {
 				_isUnique = false;
 				break;
 			}
